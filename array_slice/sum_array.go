@@ -10,7 +10,7 @@ func SumArray(data [5]int) int {
 	return sum
 }
 
-func SumSlice(data []int) int {
+func SumSlice(data []int) int { // more about slice:  https://golang.org/doc/effective_go#slices
 	sum := 0
 
 	for _, value := range data {
