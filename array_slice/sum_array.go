@@ -29,4 +29,16 @@ func SumAll(data ...[]int) (sumSlice []int) {
 	}
 
 	return
+
+	/**
+	  Another way to do it:
+
+	  func SumAll(data ...[]int) (sumSlice []int) {
+	      for _, values := range data {
+	          sumSlice = append(sumSlice, SumSlice(values))
+	      }
+
+	      return
+	  }
+	*/
 }
