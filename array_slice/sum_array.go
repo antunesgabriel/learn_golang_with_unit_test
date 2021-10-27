@@ -31,14 +31,20 @@ func SumAll(data ...[]int) (sumSlice []int) {
 	return
 
 	/**
-	  Another way to do it:
+		  Another way to do it:
 
-	  func SumAll(data ...[]int) (sumSlice []int) {
-	      for _, values := range data {
-	          sumSlice = append(sumSlice, SumSlice(values))
-	      }
+		  func SumAll(data ...[]int) (sumSlice []int) {
+		      for _, values := range data {
+		          sumSlice = append(sumSlice, SumSlice(values))
+		      }
 
-	      return
-	  }
+		      return
+		  }
+
+	      Benchmark using Append:
+	      BenchmarkSumAll-4        9953186               110.4 ns/op
+
+	      Benchmarkl using make and indexing item:
+	      BenchmarkSumAll-4       26162486                41.29 ns/op
 	*/
 }
