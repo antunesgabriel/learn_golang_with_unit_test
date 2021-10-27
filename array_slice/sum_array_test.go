@@ -2,6 +2,7 @@ package arrayslice
 
 import (
 	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -67,5 +68,43 @@ func BenchmarkSumSlice(b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		SumSlice(data)
+	}
+}
+
+func TestSumDataSlice(t *testing.T) {
+	feedback := func(expected *[]int, result *[]int, data ...[]int) {
+		if !reflect.DeepEqual(*expected, *result) {
+			t.Errorf("[FAILED] - Expected: %v - Result: %v - Data: %v", *expected, *result, data)
+		}
+	}
+
+	t.Run("sum data slices", func(t *testing.T) {
+		data1 := []int{3, 3, 3}
+		data2 := []int{5, 5, 5, 5}
+
+		expected := []int{9, 20}
+		result := SumDataSlice(data1, data2)
+
+		feedback(&expected, &result, data1, data2)
+	})
+}
+
+func ExampleSumDataSlice() {
+	data1 := []int{7, 7}
+	data2 := []int{4, 4, 4}
+
+	result := SumDataSlice(data1, data2)
+
+	fmt.Println(result)
+	// Output: [14 12]
+}
+
+func BenchmarkSumDataSlice(b *testing.B) {
+	data1 := []int{4, 4, 4}
+	data2 := []int{8, 8, 8, 8}
+	data3 := []int{18, 17, 2, 45}
+
+	for i := 0; i < b.N; i++ {
+		SumDataSlice(data1, data2, data3)
 	}
 }
