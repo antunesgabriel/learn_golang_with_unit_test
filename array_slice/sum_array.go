@@ -21,8 +21,8 @@ func SumSlice(data []int) int { // more about slice:  https://golang.org/doc/eff
 }
 
 func SumAll(data ...[]int) (sumSlice []int) {
-	lenght := len(data)
-	sumSlice = make([]int, lenght)
+	length := len(data)
+	sumSlice = make([]int, length)
 
 	for idx, values := range data {
 		sumSlice[idx] = SumSlice(values)
@@ -47,4 +47,22 @@ func SumAll(data ...[]int) (sumSlice []int) {
 	      Benchmarkl using make and indexing item:
 	      BenchmarkSumAll-4       26162486                41.29 ns/op
 	*/
+}
+
+func SumAllSliceRest(data ...[]int) (sumSlice []int) {
+	length := len(data)
+	sumSlice = make([]int, length)
+
+	for idx, values := range data {
+
+		if len(values) == 0 {
+			sumSlice[idx] = 0
+			continue
+		}
+
+		rest := values[1:] // more about slice https://go.dev/blog/slices-intro
+		sumSlice[idx] = SumSlice(rest)
+	}
+
+	return
 }

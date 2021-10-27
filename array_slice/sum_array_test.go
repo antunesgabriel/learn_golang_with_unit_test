@@ -90,13 +90,13 @@ func TestSumAll(t *testing.T) {
 }
 
 func ExampleSumAll() {
-	data1 := []int{7, 7}
+	data1 := []int{}
 	data2 := []int{4, 4, 4}
 
 	result := SumAll(data1, data2)
 
 	fmt.Println(result)
-	// Output: [14 12]
+	// Output: [0 12]
 }
 
 func BenchmarkSumAll(b *testing.B) {
@@ -107,4 +107,54 @@ func BenchmarkSumAll(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		SumAll(data1, data2, data3)
 	}
+}
+
+func TestSumAllSliceRest(t *testing.T) {
+	feedback := func(expected *[]int, result *[]int, data ...[]int) {
+		if !reflect.DeepEqual(*expected, *result) {
+			t.Errorf("[FAILED] - Expected: %v - Result: %v - Data: %v", *expected, *result, data)
+		}
+	}
+
+	t.Run("sum all slice rest", func(t *testing.T) {
+		data1 := []int{4, 4, 4}
+		data2 := []int{8, 8, 8, 8}
+		data3 := []int{18, 17, 2, 45}
+
+		expected := []int{8, 24, 64}
+		result := SumAllSliceRest(data1, data2, data3)
+
+		feedback(&expected, &result, data1, data2, data3)
+	})
+
+	t.Run("should not give error when receiving empty slices", func(t *testing.T) {
+		data1 := []int{}
+		data2 := []int{5, 5, 5}
+
+		expected := []int{0, 10}
+		result := SumAllSliceRest(data1, data2)
+
+		feedback(&expected, &result, data1, data2)
+	})
+}
+
+func ExampleSumAllSliceRest() {
+	data1 := []int{3, 2, 7}
+	data2 := []int{4, 6, 7}
+	data3 := []int{}
+
+	result := SumAllSliceRest(data1, data2, data3)
+
+	fmt.Println(result)
+	// Output: [9 13 0]
+}
+
+func BenchmarkSumAllSliceRest(b *testing.B) {
+	data1 := []int{4, 4, 4}
+	data2 := []int{8, 8, 8, 8}
+	data3 := []int{18, 17, 2, 45}
+
+    for i := 0; i < b.N; i++ {
+        SumAllSliceRest(data1, data2, data3)
+    }
 }
