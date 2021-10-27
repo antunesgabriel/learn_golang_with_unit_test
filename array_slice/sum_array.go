@@ -20,7 +20,7 @@ func SumSlice(data []int) int { // more about slice:  https://golang.org/doc/eff
 	return sum
 }
 
-func SumDataSlice(data ...[]int) (sumSlice []int) {
+func SumAll(data ...[]int) (sumSlice []int) {
 	lenght := len(data)
 	sumSlice = make([]int, lenght)
 

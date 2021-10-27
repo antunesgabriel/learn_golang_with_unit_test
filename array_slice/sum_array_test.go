@@ -71,7 +71,7 @@ func BenchmarkSumSlice(b *testing.B) {
 	}
 }
 
-func TestSumDataSlice(t *testing.T) {
+func TestSumAll(t *testing.T) {
 	feedback := func(expected *[]int, result *[]int, data ...[]int) {
 		if !reflect.DeepEqual(*expected, *result) {
 			t.Errorf("[FAILED] - Expected: %v - Result: %v - Data: %v", *expected, *result, data)
@@ -83,28 +83,28 @@ func TestSumDataSlice(t *testing.T) {
 		data2 := []int{5, 5, 5, 5}
 
 		expected := []int{9, 20}
-		result := SumDataSlice(data1, data2)
+		result := SumAll(data1, data2)
 
 		feedback(&expected, &result, data1, data2)
 	})
 }
 
-func ExampleSumDataSlice() {
+func ExampleSumAll() {
 	data1 := []int{7, 7}
 	data2 := []int{4, 4, 4}
 
-	result := SumDataSlice(data1, data2)
+	result := SumAll(data1, data2)
 
 	fmt.Println(result)
 	// Output: [14 12]
 }
 
-func BenchmarkSumDataSlice(b *testing.B) {
+func BenchmarkSumAll(b *testing.B) {
 	data1 := []int{4, 4, 4}
 	data2 := []int{8, 8, 8, 8}
 	data3 := []int{18, 17, 2, 45}
 
 	for i := 0; i < b.N; i++ {
-		SumDataSlice(data1, data2, data3)
+		SumAll(data1, data2, data3)
 	}
 }
