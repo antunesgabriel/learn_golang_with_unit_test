@@ -1,13 +1,11 @@
 package arrayslice
 
-func SumArray(data [5]int) int {
-	sum := 0
-
+func SumArray(data [5]int) (sum int) {
 	for _, value := range data { // how to use range -> https://gobyexample.com/range
 		sum += value
 	}
 
-	return sum
+	return
 }
 
 func SumSlice(data []int) int { // more about slice:  https://golang.org/doc/effective_go#slices
